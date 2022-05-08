@@ -8,7 +8,7 @@
    [ring.util.http-response :as response]))
 
 (defn home-page [request]
-  (layout/render request "home.html" {:docs (-> "docs/docs.md" io/resource slurp)}))
+  (layout/render request "questions.html" {:questions (db/get-questions)}))
 
 (defn about-page [request]
   (layout/render request "about.html"))
@@ -19,4 +19,3 @@
                  middleware/wrap-formats]}
    ["/" {:get home-page}]
    ["/about" {:get about-page}]])
-
