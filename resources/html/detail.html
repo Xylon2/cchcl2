@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="content">
+    <h1>{{question.question_text}}</h1>
+    <ul>
+    {% for choice in choices %}
+      <li>
+        {{ choice.choice_text }}
+    {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
+
