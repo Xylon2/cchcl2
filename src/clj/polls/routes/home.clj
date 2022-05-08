@@ -2,6 +2,7 @@
   (:require
    [polls.layout :as layout]
    [polls.db.core :as db]
+   [polls.auth :as auth]
    [clojure.java.io :as io]
    [polls.middleware :as middleware]
    [ring.util.response]
