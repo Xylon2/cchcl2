@@ -17,6 +17,18 @@
                               {:question qid})
                     :question (db/question-name {:id qid})})))
 
+(defn results-page [request]
+  (let [qid (Integer/parseInt ((request :query-params) "id"))]
+    (layout/render request "results.html"
+                   {:choices (db/get-choices
+                              {:question qid})})))
+
+(defn save-vote [request]
+  (let [choice (-> request :params :choice Integer/parseInt)]
+    (db/save-vote {:id choice})
+    (response/found (str "/results?id=" ((request :query-params) "id"))))
+  )
+
 (defn about-page [request]
   (layout/render request "about.html"))
 
@@ -26,4 +38,6 @@
                  middleware/wrap-formats]}
    ["/" {:get home-page}]
    ["/detail" {:get detail-page}]
+   ["/vote"    {:post save-vote}]
+   ["/results" {:get results-page}]
    ["/about" {:get about-page}]])

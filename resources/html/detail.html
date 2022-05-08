@@ -1,13 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
   <div class="content">
-    <h1>{{question.question_text}}</h1>
-    <ul>
-    {% for choice in choices %}
-      <li>
-        {{ choice.choice_text }}
-    {% endfor %}
-    </ul>
+    <form method="POST" action="/vote?id={{question.id}}">
+      {% csrf-field %}
+      <fieldset>
+        <legend><h1>{{question.question_text}}</h1></legend>
+      {% for choice in choices %}
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+      {% endfor %}
+      </fieldset>
+      <input type="submit" value="Vote">
+    </form>
   </div>
 {% endblock %}
-

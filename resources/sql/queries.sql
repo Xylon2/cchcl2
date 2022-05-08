@@ -23,3 +23,9 @@ values (:question, :choice_text)
 -- :doc retrieves all choices for a question
 select * from choice
 where question = :question
+
+-- :name save-vote :! :n
+-- :doc records the extra vote
+update choice
+set votes = votes + 1
+where id = :id
