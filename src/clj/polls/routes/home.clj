@@ -36,7 +36,8 @@
 (defn home-routes []
   [ "" 
    {:middleware [middleware/wrap-csrf
-                 middleware/wrap-formats]}
+                 middleware/wrap-formats
+                 middleware/wrap-auth]}
    ["/" {:get home-page}]
    ["/detail" {:get detail-page}]
    ["/vote"    {:post save-vote}]
